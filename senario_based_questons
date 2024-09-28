@@ -1,0 +1,19 @@
+
+# we can write in two ways
+
+select e1.employee_name,e2.salary from 
+employees_with_same_salary e1
+inner join employees_with_same_salary e2
+on e1.salary=e2.salary
+where e1.employee_id!=e2.employee_id
+;
+
+
+select e.employee_name,e.salary
+from employees_with_same_salary e
+join (
+select salary
+from employees_with_same_salary
+group by salary
+having count(*)>1)s
+on e.salary=s.salary;
