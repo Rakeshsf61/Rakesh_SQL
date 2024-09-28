@@ -17,3 +17,16 @@ from employees_with_same_salary
 group by salary
 having count(*)>1)s
 on e.salary=s.salary;
+
+
+--In this Question,
+--we will calculate the average rating for each restaurant for each month. We'll be using Zomato's review data to calculate the average rating for each restaurant on a monthly basis. 
+
+
+select 
+   month(submit_date) as mon,
+	restaurant_id,
+	avg(rating) as avg_rating
+from reviews
+group by  month(submit_date),restaurant_id
+having count(review_id)>=2--
