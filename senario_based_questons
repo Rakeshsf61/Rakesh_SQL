@@ -58,3 +58,10 @@ select user_id,concat(upper(substr(name,1,1)),lower(substr(name,2,length(name)))
 
 select user_id,concat(upper(left(name,1)),lower(right(name,length(name)-1)))
 as name from Users order by user_id;
+=================================================
+delete duplicate emails
+DELETE a.*
+FROM Person a
+JOIN Person b
+ON a.email = b.email
+where a.id > b.id
