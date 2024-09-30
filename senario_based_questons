@@ -1,4 +1,4 @@
-
+Q)employees who are getting same salary
 # we can write in two ways
 
 select e1.employee_name,e2.salary from 
