@@ -51,3 +51,10 @@ join Users users_driver
     and users_driver.role='driver'
 WHERE t.request_at BETWEEN '2013-10-01' AND '2013-10-03'
 GROUP BY t.request_at;
+=============================================================================================================
+using Functions and regular expresions
+
+select user_id,concat(upper(substr(name,1,1)),lower(substr(name,2,length(name)))) as name from Users order by user_id ;
+
+select user_id,concat(upper(left(name,1)),lower(right(name,length(name)-1)))
+as name from Users order by user_id;
