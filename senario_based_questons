@@ -30,3 +30,24 @@ select
 from reviews
 group by  month(submit_date),restaurant_id
 having count(review_id)>=2--
+
+Q)Write a solution to find the cancellation rate of requests with unbanned users (both client and driver must not be banned) each day between "2013-10-01" and "2013-10-03". 
+Round Cancellation Rate to two decimal points.
+
+select 
+    t.request_at as Day,
+    round(sum(CASE
+            WHEN STATUS IN('cancelled_by_driver','cancelled_by_client') THEN 1 ELSE 0 END
+        )/count(*),2) as 'cancellation rate'
+        
+from trips t
+join Users users_client
+    on t.client_id =users_client.users_id
+    and users_client.banned='No'
+    and users_client.role='client'
+join Users users_driver
+    on t.driver_id=users_driver.users_id
+    and users_driver.banned='No'
+    and users_driver.role='driver'
+WHERE t.request_at BETWEEN '2013-10-01' AND '2013-10-03'
+GROUP BY t.request_at;
